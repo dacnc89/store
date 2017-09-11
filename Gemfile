@@ -5,6 +5,11 @@ git_source(:github) do |repo_name|
   "https://github.com/#{repo_name}.git"
 end
 
+gem 'omniauth-facebook'
+
+
+# Add omniauth-google-oauth2 
+# gem 'omniauth-google-oauth2'
 # Add devise gem
 gem 'devise'
 # Add bootstrap and jquery
