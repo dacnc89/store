@@ -10,6 +10,18 @@
 
   <body>
     <div class="container">
+      <% flash.each do |key, value| %>
+        <% if key=="notice" %>
+          <div class="alert alert-success">
+        <% elsif key == "alert" %>
+          <div class="alert alert-danger">
+        <% else %>
+          <div class="alert alert-<%= key %>">
+        <%end%>
+        <a href="#" class="close" data-dismiss="alert">&#215;</a>
+          <%= value %>
+        </div>
+      <% end %>
       <%= yield %>
     </div>
   </body>
