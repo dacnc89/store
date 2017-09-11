@@ -29,11 +29,35 @@ a:hover{
 .inactive{
   display: none;
 }
-.menu-on-top {
-  text-align: center;
+
+// Style for devise error
+#error_explanation {
+  width: 100%;
+  border: 2px solid #036;
+  padding: 7px;
+  padding-bottom: 12px;
+  margin-bottom: 20px;
+
 }
 
+#error_explanation h2 {
+  text-align: left;
+  font-weight: bold;
+  padding: 5px 5px 5px 15px;
+  font-size: 12px;
+  color: red;
+}
 
+#error_explanation p {
+  color: #333;
+  margin-bottom: 5px;
+  padding: 5px;
+}
+
+#error_explanation ul li {
+  font-size: 12px;
+  list-style: square;
+}
 
 @media only screen and(max-width: 500px){
   .menu-on-top{
