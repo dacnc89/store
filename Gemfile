@@ -5,7 +5,8 @@ git_source(:github) do |repo_name|
   "https://github.com/#{repo_name}.git"
 end
 
-
+# Add devise gem
+gem 'devise'
 # Add bootstrap and jquery
 gem 'bootstrap'
 gem 'jquery-rails'
