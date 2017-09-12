@@ -1,5 +1,5 @@
 <h2>Log in</h2>
-
+<%= link_to "Sign in with Facebook", user_facebook_omniauth_authorize_path, class: "btn" %>
 <%= form_for(resource,html: { class: "form-group"}, as: resource_name, url: session_path(resource_name)) do |f| %>
   <div class="form-gourp">
     <%= f.label :email %><br />

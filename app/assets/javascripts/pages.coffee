@@ -2,8 +2,8 @@
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://coffeescript.org/
 
-$ ->
-  console.log("running!")
+#$ ->
+#  console.log("running!")
 #  $(".home-menu").on "click", (event) ->
 #    console.log("you are clicked home menu")
 #    $(".show-when-click-home").addClass 'active'
