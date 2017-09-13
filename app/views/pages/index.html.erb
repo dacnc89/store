@@ -2,9 +2,9 @@
 <nav class="menu-on-top">
     <a class="home-menu" href="#">Home</a>
       
-    <a href="#">About</a>
+    <a href="<%= about_path %>">About</a>
     <a class="products-menu" href="#">Products</a>
-    <a href="#">FAQs</a>
+    <a href="<%= faqs_path %>">FAQs</a>
     <% if user_signed_in? %>
       <a href="<%= destroy_user_session_path %>" data-method="delete">Log Out</a>
     <% else %>
