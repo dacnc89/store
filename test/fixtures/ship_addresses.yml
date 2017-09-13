@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  address1: MyText
+  address2: MyText
+  city: MyString
+  phone_number: 1
+  default: false
+
+two:
+  address1: MyText
+  address2: MyText
+  city: MyString
+  phone_number: 1
+  default: false
