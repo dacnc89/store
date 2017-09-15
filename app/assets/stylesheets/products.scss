@@ -1,3 +1,18 @@
-// Place all the styles related to the products controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
+.product-box{
+  background-color: white;
+  width: 320px;
+  height: 500px;
+  margin: auto;
+  border: solid 1px #036;
+
+  .product-box-image{
+    width: 318px;
+    height: 420px;
+    border-bottom: solid 1px #036;
+  }
+
+  .product-box-brand-name, .product-box-category-name, .product-box-name, .product-box-company-name {
+    margin: 0px 5px;
+    text-color: white;
+  }
+}

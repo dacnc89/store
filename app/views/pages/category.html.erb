@@ -1,0 +1,9 @@
+category page
+
+<%= @category.name %>
+<br>
+<% @category.get_parents.each do |id| %>
+  <% category = Category.find(id) %>
+  <%= link_to category.name, controller: "pages", action: :category, category_name: category.name, amount: category.products.count %> >
+<% end %>
+<%= @category.products.count %>
