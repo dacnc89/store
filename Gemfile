@@ -5,6 +5,9 @@ git_source(:github) do |repo_name|
   "https://github.com/#{repo_name}.git"
 end
 
+# Add font awesome gem
+gem "font-awesome-rails"
+
 # Add devise gem
 gem 'devise'
 # Add bootstrap and jquery
