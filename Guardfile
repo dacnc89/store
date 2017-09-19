@@ -24,6 +24,8 @@ guard 'livereload' do
     js: :js,
     coffee: :js,
     html: :html,
+    # add for reload file .rb like routes.rb
+    #rb: :rb
     png: :png,
     gif: :gif,
     jpg: :jpg,

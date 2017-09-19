@@ -2,33 +2,6 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-.menu-on-top a{
-  display: inline-block;
-  padding: 10px;
-}
-a:hover{
-  text-color: white;
-  text-decoration: none;
-}
-.show-when-click-home{
-  width: 100%;
-  height: 90px;
-  background-color: #232350;
-  display: none;
-}
-.show-when-click-products{
-  width: 100%;
-  height: 100px;
-  background-color: #232323;
-  display: none;
-}
-.active{
-  clear: both;
-  display:block;
-}
-.inactive{
-  display: none;
-}
 
 // Style for devise error
 #error_explanation {
@@ -59,20 +32,5 @@ a:hover{
   list-style: square;
 }
 
-@media only screen and(max-width: 500px){
-  .menu-on-top{
-  background-color:#036;
-}
-}
-@media only screen and (max-width: 320px){
-  .menu-on-top{
-    background-color: red;
-  }
-}
-@media only screen and (min-width: 920px){
-  .menu-on-top{
-    background-color: #502323;
-  }
-}
 
 

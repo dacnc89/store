@@ -1,0 +1,34 @@
+Order new template
+<br>
+<%= @cart.id %> 
+<br>
+<% if user_signed_in? %>
+  please choice payment type
+<% else %>
+  please <%= link_to "Sign In", new_user_session_path %> or sign up to continues checkout
+<% end %>
+<% @cart.order_items.each do |item| %>
+  <%= truncate(item.product.name, length: 15) %>,
+  <%= item.price_line %><br>
+<% end %>
+Amount: <%= @cart.amount %>
+<br>
+Do you want to use this address to ship <%= current_user.name%>
+<br>
+<%= form_tag check_out_path do %>
+  <%= radio_button_tag :paytype, :cash %>
+  <%= label_tag :Cash %>
+  <%= radio_button_tag :paytype, :visa %>
+  <%= label_tag :Visa %>
+  <%= radio_button_tag :paytype, :paypal %>
+  <%= label_tag :Paypal %><br>
+  <div id="cash"></div>
+  <div id="visa"></div>
+  <div id="paypal"></div>
+  
+
+<% end %>
+
+<br>
+<%= link_to "Checkout", check_out_path, class: "btn btn-primary" %>
+

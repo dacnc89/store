@@ -1,0 +1,11 @@
+<h1>Show product page</h1>
+<%= link_to "Home", products_path %> >
+<%= link_to @product.category.name, controller: "pages", action: "category", category_name: @product.category.name, amount: @product.category.products.count %> >
+<%= @product.brand.name %> > <%= @product.playname %>
+
+Product information
+
+<%= @product.name %>
+, Price: 
+<%= @product.price %>
+

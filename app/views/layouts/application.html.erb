@@ -9,7 +9,7 @@
   </head>
 
   <body>
-    <div class="container">
+    <div class="main container">
       <% flash.each do |key, value| %>
         <% if key=="notice" %>
           <div class="alert alert-success">
@@ -22,7 +22,74 @@
           <%= value %>
         </div>
       <% end %>
+      <nav class="menu_on_top">
+        <div class="menu-on-top dropdown">
+          <i class="dropbtn fa fa-bars"></i>
+          <div class="dropdown_content">
+            <a class="home-menu" href="#">Home</a>
+            <a href="<%= about_path %>">About</a>
+            <a class="products-menu" href="<%= products_path %>">Products</a>
+            <a href="<%= faqs_path %>">FAQs</a>
+            <% if user_signed_in? %>
+              <a href="<%= destroy_user_session_path %>" data-method="delete">Log Out</a>
+            <% else %>
+              <a href="<%= new_user_session_path %>"> Log In </a>
+              <a href="<%= new_user_registration_path %>"> Sign Up </a>
+            <% end %>
+          </div>
+        </div>
+        <div id="cart" class="right-navbar">
+          <div class="cart-icon">
+          
+            <a data-popup-open="popup-cart" href="<%= cart_path(@cart) %>"><i class="fa fa-shopping-cart"></i></a>
+          </div>
+          <div class="user-nav">
+            <% if user_signed_in? %>
+              <%= link_to '', destroy_user_session_path, method: :delete, class: "fa fa-sign-out" %>
+            <% else %>
+              <%= link_to '', new_user_registration_path, class: "fa fa-user-plus" %>
+              <%= link_to '', new_user_session_path, class: "fa fa-user" %>
+            <% end %>
+          </div>
+          <div class="popup" data-popup="popup-cart">
+            <div class="popup-inner">
+            <div class="triangle-up"></div>
+              <p> data popup in here </p>
+            </div>
+          </div>
+        </div>
+      </nav>
+
       <%= yield %>
     </div>
+    <footer>
+      <div class="container">
+        <div class="footer care">
+          <p> Hotline : 19001009 <p>
+          <%= link_to 'FAQs', faqs_path %>
+          <%= link_to 'Order guide', root_path %>
+          <%= link_to 'Send feed back', root_path %>
+        </div>
+        <!--
+        <div class="footer about">
+          <%= link_to 'About us', root_path %>
+          <%= link_to 'Contact', root_path %>
+          
+        </div>
+        <div class="footer categories">
+          Show all brand
+        </div>
+        -->
+        <div class="footer connect-us">
+          <%= link_to '  Us on facebook', root_path, class: "fa fa-facebook" %>
+          <%= link_to '  Us on youtube', root_path, class: "fa fa-youtube" %>
+          <%= link_to '  Us on twitter', root_path, class: "fa fa-twitter" %>
+        </div>
+      </div>
+      <div class="bottom">
+        <p> <i class = "fa fa-copyright"></i> 2017 by Dac Nguyen </p>
+        <p class = "small"> Build with Ruby 2.4.1, Rails 5.1.x version </p>
+      </div>
+    </footer>
   </body>
 </html>
