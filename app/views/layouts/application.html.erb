@@ -22,23 +22,35 @@
           <%= value %>
         </div>
       <% end %>
-      <nav class="menu-on-top">
-				<a class="home-menu" href="#">Home</a>
-       
-				<a href="<%= about_path %>">About</a>
-        <a class="products-menu" href="<%= products_path %>">Products</a>
-				<a href="<%= faqs_path %>">FAQs</a>
-				<% if user_signed_in? %>
-					<a href="<%= destroy_user_session_path %>" data-method="delete">Log Out</a>
-				<% else %>
-					<a href="<%= new_user_session_path %>"> Log In </a>|
-					<a href="<%= new_user_registration_path %>"> Sign Up </a>
-				<% end %>
-				<div class="show-when-click-home">
-				</div>
-				<div class="show-when-click-products">
-				</div>
-			</nav>
+      <nav class="menu_on_top">
+      <div class="menu-on-top dropdown">
+        <i class="dropbtn fa fa-bars"></i>
+        <div class="dropdown_content">
+          <a class="home-menu" href="#">Home</a>
+          <a href="<%= about_path %>">About</a>
+          <a class="products-menu" href="<%= products_path %>">Products</a>
+          <a href="<%= faqs_path %>">FAQs</a>
+          <% if user_signed_in? %>
+            <a href="<%= destroy_user_session_path %>" data-method="delete">Log Out</a>
+          <% else %>
+            <a href="<%= new_user_session_path %>"> Log In </a>
+            <a href="<%= new_user_registration_path %>"> Sign Up </a>
+          <% end %>
+        </div>
+      </div>
+      <div id="cart" class="cart_info">
+        <div class="cart-icon">
+          
+          <a data-popup-open="popup-cart" href="<%= cart_path(@cart) %>"><i class="fa fa-shopping-cart"></i></a>
+        </div>
+        <div class="popup" data-popup="popup-cart">
+          <div class="triangle-up"></div>
+          <div class="popup-inner">
+            <p> data popup in here </p>
+          </div>
+        </div>
+      </div>
+      </nav>
 
       <%= yield %>
     </div>

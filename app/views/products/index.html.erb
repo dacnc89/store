@@ -5,15 +5,20 @@
   <div class="product-box">
     <%= image_tag product.image_file, class: "product-box-image" %>
     <div class="product-box-name">
-      <%= link_to product.playname, controller: "products", action: :show, product_name: product.name %>
+      <%-# link_to product.playname, controller: "products", action: :show, product_name: product.name -%>
+      <%= link_to product.playname, product_path(product_name: product.name) %>
     </div>
+  
     <div class="product-box-brand-name">
       <%-# link_to product.brand.name, controller: "pages", action: :brand, brand_name: product.brand.name, amount: product.brand.products.all.count -%>
+      <%= product.id %>
     </div>
     <div class="product-box-category-name">
       <%= link_to product.category.name, controller: "pages", action: :category, category_name: product.category.name, amount: product.category.products.all.count %>
     </div>
-    <%-# button_to "Add to card", controller: :oder_items, action: :add_order_item, class: "product-box-add-to-cart-btn btn btn-primary" -%>
+    <button class="btn btn-primary add-to-cart-btn" value="<%= product.id %>">Add to Cart </button>
+    <div class="show-add-recent">
+    </div>
     <%-# product.category.name -%>
     <%-# product.description %>
     <%-# product.available_quantity %>

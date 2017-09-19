@@ -1,18 +1,27 @@
 .product-box{
+  opacity: 0.6;
+  display: block;
   background-color: white;
-  width: 320px;
-  height: 500px;
+  width: 80%;
+  height: calc(width * 1.5);
   margin: auto;
-  border: solid 1px #036;
+  //border: solid 1px #036;
 
   .product-box-image{
-    width: 318px;
-    height: 420px;
-    border-bottom: solid 1px #036;
+    width: 100%;
+    height: 80%;
+    //border-bottom: solid 1px #036;
   }
 
   .product-box-brand-name, .product-box-category-name, .product-box-name, .product-box-company-name {
     margin: 0px 5px;
     text-color: white;
   }
+
+  .product-box:hover{
+    border: 1px solid #333333;
+  }
+  
+  
+
 }
