@@ -1,0 +1,14 @@
+show cart page
+<% if @cart == nil %>
+  Cart is nil now
+<% end %>
+<br>
+<% @cart.order_items.each do |item| %>
+  <div class="order_item">
+    <%= truncate(item.product.name,length: 17) %>, Q: 
+    <%= item.quantity %>, Price
+    <%= item.product.price %>
+  </div>
+<% end %>
+
+<%= link_to "Check Out", check_out_path, class: "btn btn-primary" %>

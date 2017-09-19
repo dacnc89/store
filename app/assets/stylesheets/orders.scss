@@ -1,0 +1,23 @@
+// Place all the styles related to the orders controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+#cash, #visa, #paypal{
+  width: 100%;
+  height: 400px;
+}
+
+#cash {
+  background: blue;
+  display: none;
+}
+
+#visa {
+  background: pink;
+  display: none;
+}
+
+#paypal {
+  background: red;
+  display: none;
+}
