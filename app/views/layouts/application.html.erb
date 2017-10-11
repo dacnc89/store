@@ -25,8 +25,10 @@
       <nav class="menu_on_top">
         <div class="menu-on-top dropdown">
           <i class="dropbtn fa fa-bars"></i>
-          <div class="dropdown_content">
+          <div class="dropdown_content dropdown_content_show">
             <a class="home-menu" href="#">Home</a>
+
+            <div class="hide-me">
             <a href="<%= about_path %>">About</a>
             <a class="products-menu" href="<%= products_path %>">Products</a>
             <a href="<%= faqs_path %>">FAQs</a>
@@ -36,6 +38,19 @@
               <a href="<%= new_user_session_path %>"> Log In </a>
               <a href="<%= new_user_registration_path %>"> Sign Up </a>
             <% end %>
+            </div>
+
+
+          </div>
+        </div>
+        <div class="search-form">
+          <div class="search-form-wrap">
+          <%= form_tag products_path, method: "get" do %>
+          <%= text_field_tag :search, params[:search], placeholder: "Fill words to search...", class: 'text' %>
+          <%= button_tag type: "submit", class: 'btn' do %>
+            <i class="fa fa-search"></i>
+          <% end %>
+        <% end %>
           </div>
         </div>
         <div id="cart" class="right-navbar">
@@ -53,8 +68,12 @@
           </div>
           <div class="popup" data-popup="popup-cart">
             <div class="popup-inner">
-            <div class="triangle-up"></div>
-              <p> data popup in here </p>
+              <div class="triangle-up"></div>
+              <% if current_cart %>
+                <p> You have <e style="color:white"> <%= current_cart.order_items.size %> product</e> in your Cart  </p>
+              <% else %>
+                <p> You have 0 product in your cart </p>
+              <% end %>
             </div>
           </div>
         </div>

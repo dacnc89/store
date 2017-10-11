@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170915081725) do
+ActiveRecord::Schema.define(version: 20171002104748) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -19,6 +19,31 @@ ActiveRecord::Schema.define(version: 20170915081725) do
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "card_transactions", force: :cascade do |t|
+    t.bigint "card_id"
+    t.string "action"
+    t.integer "amount"
+    t.boolean "success"
+    t.string "authorization"
+    t.string "message"
+    t.text "params"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["card_id"], name: "index_card_transactions_on_card_id"
+  end
+
+  create_table "cards", force: :cascade do |t|
+    t.bigint "order_id"
+    t.string "ip_address"
+    t.string "first_name"
+    t.string "last_name"
+    t.string "card_type"
+    t.date "card_expires_on"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["order_id"], name: "index_cards_on_order_id"
   end
 
   create_table "carts", force: :cascade do |t|
@@ -52,9 +77,14 @@ ActiveRecord::Schema.define(version: 20170915081725) do
 
   create_table "orders", force: :cascade do |t|
     t.string "order_number"
+    t.integer "ship_address_id"
     t.float "fee_amount"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.text "notification_params"
+    t.string "status"
+    t.string "transaction_id"
+    t.datetime "purchased_at"
   end
 
   create_table "products", force: :cascade do |t|
@@ -71,16 +101,17 @@ ActiveRecord::Schema.define(version: 20170915081725) do
   end
 
   create_table "ship_addresses", force: :cascade do |t|
-    t.text "address1"
-    t.text "address2"
+    t.string "name"
     t.string "city"
-    t.integer "phone_number"
-    t.boolean "default", default: false
-    t.bigint "users_id"
+    t.string "district"
+    t.string "ward"
+    t.string "details"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "name"
-    t.index ["users_id"], name: "index_ship_addresses_on_users_id"
+    t.bigint "user_id"
+    t.bigint "order_id"
+    t.index ["order_id"], name: "index_ship_addresses_on_order_id"
+    t.index ["user_id"], name: "index_ship_addresses_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -96,12 +127,12 @@ ActiveRecord::Schema.define(version: 20170915081725) do
     t.inet "last_sign_in_ip"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "provider"
-    t.string "uid"
     t.string "name"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "card_transactions", "cards"
+  add_foreign_key "cards", "orders"
   add_foreign_key "order_items", "carts"
 end

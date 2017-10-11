@@ -77,7 +77,7 @@ $(document).on("turbolinks:load", function (){
 
   // For size div and image
   window.addEventListener("resize", function(e){
-    var mapElement = document.getElementByClassName("product-box");
+    var mapElement = document.getElementsByClassName("product-box");
     map.Element.style.height = mapElement.offsetWidth * 1.72;
     e.preventDefault();
   });
@@ -91,19 +91,45 @@ $(document).on("turbolinks:load", function (){
     $(this).css("opacity", "0.6");
   });
 
+  // Edit address button
+  var adrform = $('.address_form')
+  $('.edit_address_btn').on('click', function(e){
+    e.preventDefault(); 
+    adrform.fadeIn();  
+  });
+
+  // Ajax for update adress button
+  //adrform.on('submit', function(e){
+  $('.update_address_btn').on('click', function(e){
+    e.preventDefault();
+    $.ajax('/checkout/edit_address', {
+      type: 'PATCH',
+      //contenType: 'application/json',
+      dataType: 'json',
+      data: adrform.serialize(),
+      success: function(result){
+        console.log(result);      
+        adrform.fadeOut();
+        msg = $('<p></p>');
+        msg.append("Your address changed to "+ result.name +"\n" +  result.city);
+        //$('.show_address_changed').html(msg);
+        //$('.show_address_changed').show().fadeOut(3000);
+      },
+    });
+  });
 
   // ========= Radio button tag and paytype
   $('input:radio[name="paytype"]').change(function(){
     if (this.value == "cash"){
       console.log("clicked cash");
       $('#cash').show();
-      $('#visa').hide();
+      $('#card').hide();
       $('#paypal').hide();
 
     }
-    else if (this.value == "visa"){
-      console.log("clicked visa");
-      $('#visa').show();
+    else if (this.value == "card"){
+      console.log("clicked card");
+      $('#card').show();
       $('#cash').hide();
       $('#paypal').hide();
     }
@@ -111,19 +137,43 @@ $(document).on("turbolinks:load", function (){
       console.log("clicked paypal");
       $('#paypal').show();
       $('#cash').hide();
-      $('#visa').hide();
+      $('#card').hide();
     }
   });
-
+  
+  // For checkout_btn
+ /* 
+  $('.checkout_btn').on('click', function(e){
+    e.preventDefault();
+    var ship_address_id = 2;
+    $.ajax('/checkout/c/c/c', {
+      type: 'POST',
+      dataType: 'json',
+      data: {ship_address_id: ship_address_id, fee_amount = 60000.0},
+      success: function(result){
+        console.log("damn yeah");
+      },
+      error: function(xhr){
+        console.log(xhr.status + xhr.statusText +xhr.responseText);
+      }
+    });
+  });
+*/
+  
+  
 
 });
+
+var windowSize = window.innerWidth;
 // For hide popup or dropdown when click out their side
 $(document).mouseup(function (e)
     {
       var container = new Array();
       container.push($('.popup'));
+      if (window.innerWidth <= 480 ){
       container.push($('.dropdown_content'));
-
+      console.log(window.innerWidth);
+      }
       $.each(container, function(key, value) {
         if (!$(value).is(e.target) && $(value).has(e.target).length ===0)
         {

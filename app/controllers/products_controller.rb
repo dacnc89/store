@@ -1,10 +1,11 @@
 class ProductsController < ApplicationController
   def index
-    @products = Product.order('created_at ASC')
+    @products = Product.search(params[:search])
+    #@cart = Cart.find(session[:cart_id])
   end
 
   def show
-    @product = Product.find_by_name(params[:product_name])
+    @product = Product.find(params[:id])
     @category = @product.category
 
   end

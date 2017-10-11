@@ -1,8 +1,12 @@
 class Order < ApplicationRecord
+
+  before_save :unique_on
   has_many    :order_items
   has_many    :products, through: :order_items
   has_one     :ship_adress
-
+  has_one     :card
+  accepts_nested_attributes_for :card
+  validates_associated :card
 
   def self.generate_order_number
 
@@ -33,5 +37,53 @@ class Order < ApplicationRecord
     end
   end
 
+  def pass_order_item_from_cart
+      current_cart.order_items.each do |item|
+      order_items.push(item)
+    end
+  end
+
+
+#  def paypal_url(return_path)
+#    values = {
+#      business: "congdacit-facilitator@gmail.com",
+#      cmd: "_xclick",
+#      upload: 1,
+#      return: "#{Rails.application.secrets.app_host}#{return_path}",
+#      invoice: id,
+#      notify_url: "#{Rails.application.secrets.app_host}/hook",
+#        amount: fee_amount,
+#        quantity: '1',
+#        item_name: 'bla1',
+#    }
+#    "#{Rails.application.secrets.paypal_host}/cgi-bin/webscr?"+values.to_query
+#  end
+
+
+    # for order_items
+    #
+  def paypal_url(return_path)
+    values = {
+      business: "congdacit-facilitator@gmail.com",
+      cmd: "_cart",
+      upload: 1,
+      return: "#{Rails.application.secrets.app_host}#{return_path}",
+      invoice: id,
+      notify_url: "#{Rails.application.secrets.app_host}/hook"
+    }
+    order_items.each_with_index do |item, index|
+      product = Product.find(item.product_id)
+      values.merge!(
+        "amount_#{index+1}" => product.price,
+        "quantity_#{index+1}" =>"#{item.quantity}",
+        "item_name_#{index+1}" => product.name
+      )
+    end
+    "#{Rails.application.secrets.paypal_host}/cgi-bin/webscr?" + values.to_query
   
+  end
+
+
+
+
 end 

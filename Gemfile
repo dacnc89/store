@@ -5,6 +5,9 @@ git_source(:github) do |repo_name|
   "https://github.com/#{repo_name}.git"
 end
 
+# add activemerchant for payment with card
+gem 'activemerchant'
+
 # Add font awesome gem
 gem "font-awesome-rails"
 

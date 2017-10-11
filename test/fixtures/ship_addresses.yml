@@ -1,15 +1,17 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  address1: MyText
-  address2: MyText
+  name: MyString
   city: MyString
-  phone_number: 1
-  default: false
+  district: MyString
+  ward: MyString
+  details: MyString
+  user: one
 
 two:
-  address1: MyText
-  address2: MyText
+  name: MyString
   city: MyString
-  phone_number: 1
-  default: false
+  district: MyString
+  ward: MyString
+  details: MyString
+  user: two

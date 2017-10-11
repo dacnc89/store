@@ -1,14 +1,27 @@
-show cart page
+<div class="cart-page">
 <% if @cart == nil %>
   Cart is nil now
 <% end %>
-<br>
-<% @cart.order_items.each do |item| %>
-  <div class="order_item">
-    <%= truncate(item.product.name,length: 17) %>, Q: 
-    <%= item.quantity %>, Price
-    <%= item.product.price %>
-  </div>
-<% end %>
-
-<%= link_to "Check Out", check_out_path, class: "btn btn-primary" %>
+<div class="inform">
+  <% unless @cart.order_items.size != 0 %>
+    <p style = "text-align:center">
+      Your cart is empty now!<br><br>
+      <%= link_to "Continues Shopping", root_path, class: "btn btn-primary" %>
+    </p>
+  <% end %>
+  You have <%= pluralize(@cart.order_items.count, 'Product') %> in your Cart
+</div>
+<div class="order_item">
+  <% @cart.order_items.each do |item| %>
+    <span class='item name'> <%= truncate(item.product.name,length: 17) %></span> 
+    <span class='item quantity'><%= item.quantity %></span>
+    <span class='item price'><%= number_to_currency(item.price_line) %></span>
+  <% end %>
+</div>
+<div class="centerbtn">
+  <% unless @cart.order_items.size == 0 %>
+    <%= link_to "Order", new_order_path, class: "cart_btn btn btn-primary" %>
+    <%= link_to "Continues Shopping", root_path, class: "cart_btn btn btn-primary" %>
+  <% end %>
+</div>
+</div>

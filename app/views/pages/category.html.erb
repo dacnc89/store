@@ -8,4 +8,8 @@ category page
 <% end %>
 <%= @category.products.count %>
 
+<%  @products.each do |product| %>
 
+  <%= product.name %>
+  <%= product.price %>
+<% end %>

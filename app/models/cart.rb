@@ -20,5 +20,10 @@ class Cart < ApplicationRecord
     amount
   end
 
+  def pass_order_item_from_cart(order)
+     order_items.each do |item|
+       order.order_items.push(item)
+     end
+   end
 
 end

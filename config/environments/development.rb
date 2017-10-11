@@ -53,4 +53,27 @@ Rails.application.configure do
   # Use an evented file watcher to asynchronously detect changes in source code,
   # routes, locales, etc. This feature depends on the listen gem.
   config.file_watcher = ActiveSupport::EventedFileUpdateChecker
+
+
+  # Add for configure Active Merchant to checkout with credit card
+#  config.after_initialize do
+#    ActiveMerchant::Billing::Base.mode = :test # :production when you you use a real Account
+#    ::GATEWAY = ActiveMerchant::Billing::PaypalGateway.new(
+#      login: "congdacit-facilitator_api1.gmail.com",
+#      password: "KZQBDLLTQFZJ8ZRD",
+#      signature: "AFcWxV21C7fd0v3bYYYRCpSSRl31A3fWlxAOilCv0dI7zsDF6T9YkC1s"
+#    )
+#  end
+
+    config.after_initialize do
+    ActiveMerchant::Billing::Base.mode = :test  # :production when you will use a real Pro Account
+    ::GATEWAY = ActiveMerchant::Billing::PaypalGateway.new(
+      login: "congdacit-facilitator_api1.gmail.com",
+      password: "KZQBDLLTQFZJ8ZRD",
+      signature: "AFcWxV21C7fd0v3bYYYRCpSSRl31A3fWlxAOilCv0dI7zsDF6T9YkC1s"
+    )
+  end
+
+
+
 end

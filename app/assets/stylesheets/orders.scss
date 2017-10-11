@@ -2,9 +2,9 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-#cash, #visa, #paypal{
+#cash, #card, #paypal{
   width: 100%;
-  height: 400px;
+  min-height: 10px;
 }
 
 #cash {
@@ -12,8 +12,8 @@
   display: none;
 }
 
-#visa {
-  background: pink;
+#card {
+  //background: pink;
   display: none;
 }
 
