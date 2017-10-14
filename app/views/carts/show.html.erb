@@ -25,6 +25,9 @@
     </div>
   <% end %>
 </div>
+<div class="total" style="text-align:center; padding: 10px;">
+  Total: <%= number_to_currency(@cart.amount) %>
+</div>
 <div class="centerbtn">
   <% unless @cart.order_items.size == 0 %>
     <%= link_to "Order", new_order_path, class: "cart_btn btn btn-primary" %>

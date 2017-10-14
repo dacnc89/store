@@ -1,11 +1,10 @@
-<div class="show_address_changed">
-  </div>
 <div id="address_form">
-<%-# form_for @ship_address, url: ship_address_path, method: 'patch', html: {class: "address_form form-group"}  do |f|  %>
-<%= form_for @ship_address, url: ship_address_path, method: 'patch', html: {class: "address_form form-group"}  do |f|  %>
+  <%-# form_for @ship_address, url: ship_address_path, method: 'patch', html: {class: "address_form form-group"}  do |f|  %>
+    <% @ship_address = ShipAddress.new %>
+<%= form_for @ship_address, html: {class: "address_form form-group"}  do |f|  %>
   <fieldset class="form-group">
-    <%= f.hidden_field :user_id, class: "user_id" %>
-    <%= f.hidden_field :id, class: "address_id" %>
+    <%= f.hidden_field :user_id, value: current_user.id %>
+    <%-# f.hidden_field :id, class: "address_id" %>
     <%= f.label :name %>
     <%= f.text_field :name, class: "form-control address_name" %>
   </fieldset>
@@ -25,6 +24,7 @@
     <%= f.label :details %>
     <%= f.text_field :details,class: "form-control address_details" %>
   </fieldset>
-  <%= f.button 'Update Address', class: "update_address_btn btn btn-primary" %>
+  <%= f.button 'Create Address', class: "create_address_btn btn btn-primary" %>
 <% end %>
 </div>
+

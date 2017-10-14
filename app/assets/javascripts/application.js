@@ -41,7 +41,7 @@ $(document).on("turbolinks:load", function (){
           msg.append('<i class="fa fa-check-square-o"></i> '+ "Add to cart success" + "<br>");
           msg.append("Quantity: "+ result.order_item.quantity + "<br>");
           //$(".show-add-recent").html(msg);
-          $(".popup-inner").html(msg);
+          $(".inform-message").html(msg);
           $(".popup").show(300);
           
 
@@ -117,7 +117,22 @@ $(document).on("turbolinks:load", function (){
       },
     });
   });
-
+  // For create address button
+  $('.create_address_btn').on('click', function(e){
+    e.preventDefault();
+    $.ajax('checkout/create_address',{
+      type: 'POST',
+      dataType: 'json',
+      data: $(this).parent().serialize(),
+      success: function(result){
+        console.log(result);
+      },
+      error: function(error){
+        console.log(error);
+        $(this).parent().fadeOut();
+      }
+    });
+  });
   // ========= Radio button tag and paytype
   $('input:radio[name="paytype"]').change(function(){
     if (this.value == "cash"){
@@ -162,6 +177,8 @@ $(document).on("turbolinks:load", function (){
         quantity_number_input.val(result.quantity);
         $('.price-'+item_id).val(result.price);
         $('.price-'+item_id).html('$' + result.price +'.00');
+        $('.total').html('Total: $'+result.total+ '.00');
+        $('.total').css("color", "#ff6347");
       }
     });
   });
@@ -184,6 +201,8 @@ $(document).on("turbolinks:load", function (){
         console.log(result);
         quantity_number_input.val(result.quantity);
         $('.price-'+item_id).html('$'+result.price+'.00');
+        $('.total').html('Total: $'+result.total+'.00');
+        $('.total').css("color", "#ff6347");
       }
     });
     } else{
@@ -271,6 +290,15 @@ $(document).on("turbolinks:load", function (){
       success: function(result){
         console.log(result);
         $('.order_item_'+result.id).remove();
+
+        var msg = $("<p></p>");  
+          msg.append('<i class="fa fa-check-square-o"></i> '+ "Dropped product ! Products reduced 1" + "<br>");
+          //$(".show-add-recent").html(msg);
+          $(".inform-message").html(msg);
+          $(".popup").show(300);
+
+
+
       },
       error: function(error){}
     });

@@ -42,6 +42,7 @@ class OrdersController < ApplicationController
     
     #@order.ship_address_id = current_user.ship_address.id
     if @order.save
+      current_cart.destroy
       case params['paytype']
         when "card"
           if @order.card.purchase
@@ -53,7 +54,7 @@ class OrdersController < ApplicationController
           redirect_to @order.paypal_url(order_path(@order))
         when "cash"
           redirect_to order_path(@order)
-          flash[:success] = "Hey"
+          flash[:success] = "Successful inform from shopping online"
         end
     
     else

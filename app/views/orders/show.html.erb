@@ -1,5 +1,15 @@
-<h5> This is show page for <%= @order.id %> </h1> 
-<%= @order.fee_amount %>
-<%= @addr.name %>
+<div class="inform-success">
+  Welcome <%= current_user.ship_address.name %>, you've order successful<br>
+  An email has sent to <%= current_user.email %> <br>
+  Your order number is <%= @order.order_number %><br>
+  We will ship product: to
+  <%= current_user.ship_address.name %> at <br>
+  <%= current_user.ship_address.details %> ,
+  <%= current_user.ship_address.ward %> ,
+  <%= current_user.ship_address.district %> ,
+  <%= current_user.ship_address.city %>
+  <br><br>
+  To cotinues shopping, click <%= link_to "Here", root_path %>
+</div>
 
 
