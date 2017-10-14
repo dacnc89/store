@@ -25,6 +25,7 @@ Rails.application.routes.draw do
   get 'checkout', to: 'orders#new', as: 'new_order'
   post 'checkout', to: 'orders#create', as: 'orders'
   patch 'checkout/edit_address', to: 'ship_addresses#update', as: 'ship_address'
+  post 'checkout/create_address', to: 'ship_addresses#create', as: 'ship_addresses'
 
   #get '/orders', to: 'orders#index', as: 'orders'
   #post '/order/:id', to: 'orders#show'

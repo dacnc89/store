@@ -14,7 +14,11 @@ Order new template
     <%= render partial: 'users/shared/address' %> 
   </div>
 <% else %>
-  Please update your addres to ship to! and then show link to update address
+  <span style="color:red">Please update your address <i class="edit_address_btn fa fa-edit" style="color:#ff6347">Here</i>
+    to ship to! and then show link to update address</span>
+  <div class="edit-address-form">
+    <%= render partial: 'users/shared/new_address' %>
+  </div>
 <% end %>
 <div class="cart_page">
 <% @cart.order_items.each do |item| %>
@@ -25,12 +29,15 @@ Order new template
 
 
 <%= form_for @order do |f| %>
+  <%if current_user.ship_address.present? %>
     <%= f.hidden_field :ship_address_id, value: current_user.ship_address.id %>
+  <% end %>
+  
     <%= f.hidden_field :fee_amount, value: current_cart.amount %>
 
 
 
-Amount: <%= @cart.amount %>
+Amount: <%= number_to_currency(@cart.amount) %>
 <div class= "field pay_type">
   <%= radio_button_tag :paytype, :cash %>
   <%= label_tag :Cash %>
@@ -40,9 +47,10 @@ Amount: <%= @cart.amount %>
   <%= label_tag :Paypal %><br>
 </div>
 <div id="cash">
+  <% if current_user.ship_address.present? %>
   Shipto: <% add =  current_user.ship_address %>
 <%= add.name %> <%= add.city %> <%= add.district %> <%= add.ward %> <%= add.details %>
-  Products: list products
+  <% end %>
 </div>
 <div id="card">
   <%= f.fields_for :card do |c| %>

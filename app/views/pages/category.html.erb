@@ -1,15 +1,30 @@
-category page
 
-<%= @category.name %>
-<br>
 <% @category.get_parents.each do |id| %>
   <% category = Category.find(id) %>
   <%= link_to category.name, controller: "pages", action: :category, category_name: category.name, amount: category.products.count %> >
 <% end %>
-<%= @category.products.count %>
+<%= pluralize(@category.products.count, 'product') %>
 
-<%  @products.each do |product| %>
 
-  <%= product.name %>
-  <%= product.price %>
+
+<div class="products-wrapper">
+<% @products.each do |product| %>
+  <div class="product-box-wrapper ">
+    <div class="product_image">
+      <%= link_to image_tag(product.image_file), product_path(product.id) %>
+    </div>
+    <div class="bottom">
+      <div class="center-child">
+        <button class="add-to-cart-btn btn", value = "<%= product.id %>"> Add to Cart </button>
+      </div>
+      <%= link_to product.name, product_path(product.id) %><br>
+      <%= product.category.name %>
+    </div>
+  </div>
 <% end %>
+</div>
+
+<div class="flickr_pagination">
+  <%= will_paginate @products, :container => false %>
+</div>
+

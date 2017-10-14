@@ -11,7 +11,7 @@ class PagesController < ApplicationController
   def category
    # @category = Category.find_by_name(params[:category_name])
     @category  = Category.find(params[:category_id])
-    @products = @category.products
+    @products = @category.products.paginate(page: params[:page])
     
   end
   

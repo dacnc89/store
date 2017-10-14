@@ -34,7 +34,7 @@ class OrderItemsController < ApplicationController
     quantity = params[:quantity]
     if @order_item.update(quantity: params[:quantity])
       respond_to do |format|
-    format.json {render json: {quantity: @order_item.quantity, price: @order_item.price_line}}
+    format.json {render json: {quantity: @order_item.quantity, price: @order_item.price_line, total: current_cart.amount}}
       end
     end    
   end

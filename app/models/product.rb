@@ -5,6 +5,9 @@ class Product < ApplicationRecord
   has_many   :order_items
   has_many   :order, through: :order_items
 
+  # for will_paginate gem
+  self.per_page = 20
+  WillPaginate.per_page = 20
 
   def playname
     name.split("-").join(" ")

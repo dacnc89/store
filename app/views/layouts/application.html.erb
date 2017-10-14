@@ -26,7 +26,7 @@
         <div class="menu-on-top dropdown">
           <i class="dropbtn fa fa-bars"></i>
           <div class="dropdown_content dropdown_content_show">
-            <a class="home-menu" href="#">Home</a>
+            <a class="home-menu" href="<%=root_path%>">Home</a>
 
             <div class="hide-me">
             <a href="<%= about_path %>">About</a>
@@ -70,7 +70,7 @@
             <div class="popup-inner">
               <div class="triangle-up"></div>
               <% if current_cart %>
-                <p> You have <e style="color:white"> <%= current_cart.order_items.size %> product</e> in your Cart  </p>
+                <p class="inform-message"> You have <e style="color:white"> <%= pluralize(current_cart.order_items.size, 'product') %> </e> in your Cart  </p>
               <% else %>
                 <p> You have 0 product in your cart </p>
               <% end %>

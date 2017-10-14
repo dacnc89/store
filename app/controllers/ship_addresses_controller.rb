@@ -1,8 +1,17 @@
 class ShipAddressesController < ApplicationController
-  
+
+
+  def new
+    @ship_address = ShipAddress.new
+  end
+
   def create
-    @ship_address = ShipAdress.new(address_params)
-    render json: @ship_address
+    @ship_address = ShipAddress.new(address_params)
+    if @ship_address.save
+      render json: @ship_address
+    else
+      render json: {error: @ship_address.errors}
+    end
   end
 
 
