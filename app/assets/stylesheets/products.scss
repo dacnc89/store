@@ -170,3 +170,30 @@
 
 
 }
+
+@media only screen and(max-width: 579px){
+  .products-wrapper{
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(1, 100%);
+  }
+  .product-box-wrapper{
+    margin: auto;
+    width: 75%;
+    height: 320px;
+    border-radius: 4px;
+    position: relative;
+    grid-gap: 15px;
+    img{
+      position: absolute;
+      width: 80%;
+      height: 270px;
+      margin: auto;
+    }
+    .bottom{
+      position: absolute;
+      bottom: 0;
+    }
+    .btn:hover{color:white;}
+  }
+}
