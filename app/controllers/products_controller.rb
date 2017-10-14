@@ -1,6 +1,6 @@
 class ProductsController < ApplicationController
   def index
-    @products = Product.search(params[:search])
+    @products = Product.paginate(page: params[:page]).search(params[:search])
     #@cart = Cart.find(session[:cart_id])
   end
 

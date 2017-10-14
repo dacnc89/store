@@ -5,6 +5,9 @@ git_source(:github) do |repo_name|
   "https://github.com/#{repo_name}.git"
 end
 
+# Ad will_paginate for pages products
+gem 'will_paginate'
+
 # add activemerchant for payment with card
 gem 'activemerchant'
 
