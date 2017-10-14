@@ -5,8 +5,18 @@
 <%= @product.brand.name %>  <%= @product.playname %>
 
 Product information
-
-<%= @product.name %>
-, Price: 
-<%= @product.price %>
-
+<div class="product">
+<%= image_tag @product.image_file %>
+</div>
+<div class="center-content" style ="text-align: center">
+  <div class="product-description">
+    Category: <%= @product.category.name%>
+  <div class="product-name">
+    Name: <%= @product.name %>
+  </div>
+<div class="product-price">
+  Price: <%= @product.price %>
+</div>
+</div>
+<button class="btn btn-primary add-to-cart-btn" style="margin: auto" value="<%= @product.id %>">Buy Now</button>
+</div>

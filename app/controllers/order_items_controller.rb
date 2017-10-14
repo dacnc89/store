@@ -3,6 +3,13 @@ class OrderItemsController < ApplicationController
   before_action :set_cart, only: :add_order_item
   before_action :set_order_item, only: [:show, :edit, :update, :destroy]
 
+
+  def show
+    respond_to do |format|
+      format.json {render json: {quantity: @order_item.quantity}}
+    end
+  end
+  
   def add_order_item
     @product = Product.find(params[:id])
     @order_item = @cart.add_order_item(params[:id])
@@ -22,6 +29,23 @@ class OrderItemsController < ApplicationController
       end
     end
   end
+  
+  def update
+    quantity = params[:quantity]
+    if @order_item.update(quantity: params[:quantity])
+      respond_to do |format|
+    format.json {render json: {quantity: @order_item.quantity, price: @order_item.price_line}}
+      end
+    end    
+  end
+
+  def destroy
+    @order_item.destroy
+    respond_to do |format|
+      format.json {render json: {message: "Deleted order item", id: @order_item.id}}
+    end
+  end
+
 
   def set_order_item
     @order_item = OrderItem.find(params[:id])

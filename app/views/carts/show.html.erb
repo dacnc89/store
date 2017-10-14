@@ -13,9 +13,16 @@
 </div>
 <div class="order_item">
   <% @cart.order_items.each do |item| %>
+    <div class="item-wrapper order_item_<%=item.id%>">
     <span class='item name'> <%= truncate(item.product.name,length: 17) %></span> 
-    <span class='item quantity'><%= item.quantity %></span>
-    <span class='item price'><%= number_to_currency(item.price_line) %></span>
+    <span class="custom-quantity quantity">
+      <button class= "btn btn-primary fa fa-minus minus" value="<%=item.id%>"></button>
+      <input class="custom-number-<%=item.id%> custom-number" value="<%= item.quantity %>">
+      <button class="btn btn-primary plus-button fa fa-plus plus-<%=item.id%>" value="<%=item.id%>"></button>
+    </span>
+    <span class='item price price-<%=item.id%>'><%= number_to_currency(item.price_line) %></span>
+    <span class='delete-order-item fa fa-trash' style="color:red;"></span>
+    </div>
   <% end %>
 </div>
 <div class="centerbtn">

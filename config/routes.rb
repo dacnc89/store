@@ -8,10 +8,15 @@ Rails.application.routes.draw do
 #  get '/:brand_name/:amount', to: 'pages#brand'
   get '/category/:category_id', to: 'pages#category', as: 'category'
   get 'product/:id', to: 'products#show', as: 'product'
-  
+
+  #get order item
+  get '/order_items/:id', to: 'order_items#show' 
   #create order item when click add to cart button
   post '/order_items', to: 'order_items#add_order_item'
-  
+  #update order item when click or change number of quantity in cart
+  patch '/order_items', to: 'order_items#update' 
+  delete '/order_items/:id', to: 'order_items#destroy'
+
   root to: 'products#index'
   get 'pages/index'
   get 'checkout/cart/details', to: 'carts#show', as: 'cart'

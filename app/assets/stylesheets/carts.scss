@@ -7,17 +7,21 @@
 }
 .order_item{
   padding: 7px 0px;
+  margin: 5px;
   border-top: 1px solid #333333;
-  line-height: 45px;
+  margin-bottom: 5px;
+
 }
 .item {
-  margin: 0;
-  width: 50%;
+  margin: 15px;
+  width: 40%;
   display: inline-block;
 }
-.quantity, .price {
+.price {
   text-align: center;
-  width: 20%;
+  width: 10%;
+}
+.custom-quantity{
 }
 
 
@@ -26,4 +30,19 @@
 .cart_btn, .checkout_btn {
   margin-top : 15px;
 
+}
+
+
+
+.custom-number{
+  width: 30px;
+  padding: 2px;
+  text-align: center;
+}
+
+.fa:hover{
+  color: white;
+}
+.fa{
+  color: white;
 }

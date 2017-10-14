@@ -140,6 +140,141 @@ $(document).on("turbolinks:load", function (){
       $('#card').hide();
     }
   });
+
+
+  // For choose custom number quantity of product when add to cart
+  $('.plus-button').on('click', function(e){
+    e.preventDefault();
+    console.log(item_id);
+    console.log('click increment');
+    var item_id = $(this).val();
+    console.log("Item id " + item_id);
+    var quantity_number_input = $(this).parent().find('.custom-number-'+item_id);
+    var quantity = Number(quantity_number_input.val()) + 1;
+    quantity = quantity.toString();
+    console.log(quantity);
+    $.ajax('/order_items',{
+      type: 'PATCH',
+      dataType: 'json',
+      data: {id: $(this).val(), quantity: quantity},
+      success: function(result){
+        console.log(result);
+        quantity_number_input.val(result.quantity);
+        $('.price-'+item_id).val(result.price);
+        $('.price-'+item_id).html('$' + result.price +'.00');
+      }
+    });
+  });
+
+  $('.minus').on('click', function(e){
+    console.log('click minus');
+    e.preventDefault();
+    var item_id = $(this).val();
+    console.log("Item id: " + item_id);
+    var quantity_number_input = $(this).parent().find('.custom-number-' + item_id);
+    var quantity = Number(quantity_number_input.val()) - 1;
+    if (quantity >= 1){
+    quantity = quantity.toString();
+    console.log(quantity);
+    $.ajax('/order_items', {
+      type: 'PATCH',
+      dataType: 'json',
+      data: {id: $(this).val(), quantity: quantity},
+      success: function(result){
+        console.log(result);
+        quantity_number_input.val(result.quantity);
+        $('.price-'+item_id).html('$'+result.price+'.00');
+      }
+    });
+    } else{
+      alert("must > 0");
+    }
+
+  });
+
+  // For custom number in quantity_number_input==============>BEGIN
+  // Setup before functions
+  var typingTimer;
+  var doneTypingInterval = 1000;
+  
+  //on keyup, start the countdown
+  $('.custom-number').keyup(function(e){
+    clearTimeout(typingTimer);
+    var current = $(this);
+    var current_quantity = current.val();
+    var quantity = current_quantity;
+    //if(current.val()&& (e.which != 8 && e.which != 0 && (e.which < 48 || e.which > 57)){
+    if(e.which != 8 && e.which != 0 && (e.which < 48 || e.which > 57)){ //=> if user doesn't press number
+      alert("Please press only number! Thanks you");
+      $.ajax('/order_items/'+current.parent().find('.minus').val(),{     //=> Begin show current quantity
+          type: 'GET',
+          dataType: 'json',
+          success: function(result){
+            console.log(result);
+            current.val(result.quantity);
+        }}
+        );                                                              //=> End show current quantity
+      console.log("Current quantity: "+quantity);
+      console.log("error");
+      return false;
+    }else if(current.val()&&current.val()>0){     // elsif user press number 
+      typingTimer = setTimeout(function(){  //==>Begin update quantity number setTimeout(fun, time);
+        var quantityNumberInput = current;
+        console.log(current.val());
+        var item_id = quantityNumberInput.parent().find('.minus').val();
+        console.log("Item id: "+item_id);
+        $.ajax('/order_items',{
+          type: 'PATCH',
+          dataType: 'json',
+          data: {id: item_id, quantity: current.val()},
+          success: function(result){
+            console.log(result);
+            current.val(result.quantity);
+            $('.price-'+item_id).html("$"+result.price+".00");
+          }
+        });
+      },                                  //==>End update quantity number
+      doneTypingInterval);                //==>Time out to wait user press custom number
+    }
+    console.log("you press 0");
+  });
+  
+  //user is finished typing, do somthing
+  function changeQuantityNumber(){
+    
+    var quantityNumberInput = $('.custom-number');
+    var item_id = quantityNumberInput.parent().find('.fa-plus').val();
+    console.log("Item id:" +item_id);
+    console.log(quantityNumberInput.val());
+    $.ajax('/order_items',{
+      type: 'PATCH',
+      dataType: 'json',
+      data: {id: item_id, quantity: quantityNumberInput.val()},
+      success: function(result){
+        console.log(result);
+      }
+    });
+
+  }
+
+  // For delete order_item in cart
+  $('.delete-order-item').on('click', function(e){
+    alert("Are you sure to delete this product in your cart?");
+    e.preventDefault();
+    console.log('clicked delete Order item');
+    console.log($(this).parent().find('.minus').val());
+    var item_id = $(this).parent().find('.minus').val();
+    $.ajax('/order_items/'+ item_id, {
+      type: 'POST',
+      dataType: 'json',
+      data: {_method: "delete"},
+      success: function(result){
+        console.log(result);
+        $('.order_item_'+result.id).remove();
+      },
+      error: function(error){}
+    });
+  });
   
   // For checkout_btn
  /* 
@@ -160,7 +295,7 @@ $(document).on("turbolinks:load", function (){
   });
 */
   
-  
+ 
 
 });
 
