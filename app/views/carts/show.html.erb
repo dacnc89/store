@@ -1,6 +1,6 @@
 <div class="cart-page">
-<% if @cart == nil || @cart.order_items.size == 0%>
-  Cart is nil now || @cart.order_items.size = 0
+<% if @cart == nil%>
+  Cart is nil now 
 <% end %>
 <div class="inform">
   <% unless @cart.order_items.size != 0 %>
