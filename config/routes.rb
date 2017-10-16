@@ -19,7 +19,7 @@ Rails.application.routes.draw do
 
   root to: 'products#index'
   get 'pages/index'
-  get 'checkout/cart/details', to: 'carts#show', as: 'cart'
+  get '/cart/:id', to: 'carts#show', as: 'cart'
 
   get 'checkout/:id', to: 'orders#show', as: 'order'
   get 'checkout', to: 'orders#new', as: 'new_order'

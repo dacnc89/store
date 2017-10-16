@@ -56,7 +56,7 @@
         <div id="cart" class="right-navbar">
           <div class="cart-icon">
           
-            <a data-popup-open="popup-cart" href="<%= cart_path(@cart) %>"><i class="fa fa-shopping-cart"></i></a>
+            <a data-popup-open="popup-cart" href="<%= cart_path(@cart.id) %>"><i class="fa fa-shopping-cart"></i></a>
           </div>
           <div class="user-nav">
             <% if user_signed_in? %>
