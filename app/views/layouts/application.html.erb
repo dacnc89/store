@@ -69,7 +69,7 @@
           <div class="popup" data-popup="popup-cart">
             <div class="popup-inner">
               <div class="triangle-up"></div>
-              <% if current_cart.order_items.count>0 %>
+              <% if current_cart %>
                 <p class="inform-message"> You have <e style="color:white"> <%= pluralize(current_cart.order_items.size, 'product') %> </e> in your Cart  </p>
               <% else %>
                 <p> You have 0 product in your cart </p>

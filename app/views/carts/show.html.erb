@@ -11,6 +11,16 @@
   <% end %>
   You have <%= pluralize(@cart.order_items.count, 'Product') %> in your Cart
 </div>
+
+<% if @cart.order_items == nil %>
+  @cart,order_items == nil 
+<% else %>
+  @cart.order_item not nil 
+<% end %>
+
+
+
+
 <div class="order_item">
   <% @cart.order_items.each do |item| %>
     <div class="item-wrapper order_item_<%=item.id%>">
