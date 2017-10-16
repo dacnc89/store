@@ -5,6 +5,11 @@ git_source(:github) do |repo_name|
   "https://github.com/#{repo_name}.git"
 end
 
+
+source 'https://rails-assets.org' do
+  gem 'rails-assets-tether', '>=1.1.0'
+end
+
 # Ad will_paginate for pages products
 gem 'will_paginate'
 
