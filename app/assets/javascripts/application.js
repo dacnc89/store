@@ -250,6 +250,8 @@ $(document).on("turbolinks:load", function (){
             console.log(result);
             current.val(result.quantity);
             $('.price-'+item_id).html("$"+result.price+".00");
+            $('.total').html("Total: $"+result.total+".00");
+            $('.total').css("color", "red");
           }
         });
       },                                  //==>End update quantity number
@@ -296,7 +298,8 @@ $(document).on("turbolinks:load", function (){
           //$(".show-add-recent").html(msg);
           $(".inform-message").html(msg);
           $(".popup").show(300);
-
+          $('.total').html("Total: $"+result.total+".00");
+          $('.total').css("color", "red");
 
 
       },

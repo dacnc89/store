@@ -42,6 +42,7 @@ a:hover {
 
 
 .popup {
+  
   width: 200px;
   //height: 100px;
 }
@@ -52,7 +53,7 @@ a:hover {
   background: #ff6347;
   border-radius: 4px;
   clear: both;
-
+  z-index: 9999;
 }
 
 /* Inner */
@@ -69,6 +70,7 @@ a:hover {
 
 }
 .popup-inner {
+  z-index: 1000;
   display: block;
   border-radius: 7px;
   margin-bottom:1px;
@@ -370,3 +372,11 @@ footer{
 
 
 //============== Query for product
+.nav-on-top{
+  font-size: 18px;
+  a:hover{
+    color: #ff6347;
+  }
+}
+
+

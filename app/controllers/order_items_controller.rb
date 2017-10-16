@@ -42,7 +42,7 @@ class OrderItemsController < ApplicationController
   def destroy
     @order_item.destroy
     respond_to do |format|
-      format.json {render json: {message: "Deleted order item", id: @order_item.id}}
+      format.json {render json: {message: "Deleted order item", id: @order_item.id, total: current_cart.amount}}
     end
   end
 

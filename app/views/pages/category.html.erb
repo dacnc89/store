@@ -1,10 +1,11 @@
 
-<% @category.get_parents.each do |id| %>
-  <% category = Category.find(id) %>
-  <%= link_to category.name, controller: "pages", action: :category, category_name: category.name, amount: category.products.count %> >
-<% end %>
-<%= pluralize(@category.products.count, 'product') %>
-
+<div class="nav-on-top">
+  <%= link_to "Home", products_path %> <span style="color:green" class="fa fa-angle-double-right"></span>
+  <% @parents.each do |category| %>
+    <%= link_to category.name, category_path(category.id) %> <span style ="color:green" class="fa fa-angle-double-right"></span>
+  <% end %>
+  <%= pluralize(@category.products.count, 'product') %>
+</div>
 
 
 <div class="products-wrapper">
