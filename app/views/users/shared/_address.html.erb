@@ -1,7 +1,6 @@
 <div class="show_address_changed">
   </div>
 <div id="address_form">
-<%-# form_for @ship_address, url: ship_address_path, method: 'patch', html: {class: "address_form form-group"}  do |f|  %>
 <%= form_for @ship_address, url: ship_address_path, method: 'patch', html: {class: "address_form form-group"}  do |f|  %>
   <fieldset class="form-group">
     <%= f.hidden_field :user_id, class: "user_id" %>

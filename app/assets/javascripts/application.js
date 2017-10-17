@@ -127,10 +127,13 @@ $(document).on("turbolinks:load", function (){
       data: $(this).parent().serialize(),
       success: function(result){
         console.log(result);
+        $('#new_ship_address').fadeOut();
+        $('.create_address_link').html("created address");
+        $('.create_address_link').css("color", "green");
+        location.reload();
       },
       error: function(error){
         console.log(error);
-        $(this).parent().fadeOut();
       }
     });
   });

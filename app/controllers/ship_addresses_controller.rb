@@ -8,7 +8,10 @@ class ShipAddressesController < ApplicationController
   def create
     @ship_address = ShipAddress.new(address_params)
     if @ship_address.save
-      render json: @ship_address
+      respond_to do |format|
+        format.html { redirect_to new_order_path}
+        format.json { render json: @ship_address}
+      end
     else
       render json: {error: @ship_address.errors}
     end
@@ -28,7 +31,12 @@ class ShipAddressesController < ApplicationController
       end
     end
   end
+  
 
+  def destroy
+    @ship_address = ShipAdress.find(ship_address_id)
+    @ship_address.destroy
+  end
   private
   def address_params
     params.require(:ship_address).permit(:name, :city, :district, :ward, :details, :user_id)

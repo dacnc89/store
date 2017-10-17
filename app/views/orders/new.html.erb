@@ -9,12 +9,14 @@ Order new template
 <br>
 <%if current_user.ship_address != nil %>
 
-  Use this address or edit <i class="edit_address_btn fa fa-edit" style="color:#ff6347">Here</i>
+  <span class = "edit_address_link">Use this address or edit <i class="edit_address_btn fa fa-edit" style="color:#ff6347">Here</i></span>
   <div class="edit-address-form">
-    <%= render partial: 'users/shared/address' %> 
+    <% if current_user.ship_address.present? %>
+      <%= render partial: 'users/shared/address' %> 
+    <% end %>
   </div>
 <% else %>
-  <span style="color:red">Please update your address <i class="edit_address_btn fa fa-edit" style="color:#ff6347">Here</i>
+  <span class="create_address_link" style="color:red">Please update your address <i class="edit_address_btn fa fa-edit" style="color:#ff6347">Here</i>
     to ship to! and then show link to update address</span>
   <div class="edit-address-form">
     <%= render partial: 'users/shared/new_address' %>
@@ -28,14 +30,6 @@ Order new template
 </div>
 
 
-<%= form_for @order do |f| %>
-  <%if current_user.ship_address.present? %>
-    <%= f.hidden_field :ship_address_id, value: current_user.ship_address.id %>
-  <% end %>
-  
-    <%= f.hidden_field :fee_amount, value: current_cart.amount %>
-
-
 
 Amount: <%= number_to_currency(@cart.amount) %>
 <div class= "field pay_type">
@@ -46,57 +40,93 @@ Amount: <%= number_to_currency(@cart.amount) %>
   <%= radio_button_tag :paytype, :paypal %>
   <%= label_tag :Paypal %><br>
 </div>
+
+
+
+
 <div id="cash">
   <% if current_user.ship_address.present? %>
   Shipto: <% add =  current_user.ship_address %>
 <%= add.name %> <%= add.city %> <%= add.district %> <%= add.ward %> <%= add.details %>
+  <% else %>
+  Please update address
+<% end %>
+<%= form_for @order do |f| %>
+  <% if current_user.ship_address.present? %>
+      <%= f.hidden_field :ship_address_id, value: current_user.ship_address.id, class:  "ship_address_id" %>
+  <% else %>
+    current user has not address yet 
+  <% end %>
+  <%= f.hidden_field :fee_amount, value: current_cart.amount %>
+  <%= f.hidden_field :paytype, value: "cash", class: 'paytype_cash' %>
+  <div class="centerbtn">
+    <%= f.submit "Checkout", class: "btn btn-primary checkout_btn"%>
+  </div>
   <% end %>
 </div>
+
+
+
+
+
 <div id="card">
-  <%= f.fields_for :card do |c| %>
-    <fieldset class = "form-group">
-    <%= c.label :first_name %>
-    <%= c.text_field :first_name, class: "form-control" %>
-    </fieldset>
+  <%= form_for @order do |f| %>
+    <%if current_user.ship_address.present? %>
+      <%= f.hidden_field :ship_address_id, value: current_user.ship_address.id, class:  "ship_address_id" %>
+    <% end %>
+    <%= f.hidden_field :fee_amount, value: current_cart.amount %>
+    <%= f.hidden_field :paytype, value: "card", class: 'paytype_card' %>
 
-    <fieldset class = "form-group">
-    <%= c.label :last_name %>
-    <%= c.text_field :last_name, class: "form-control" %>
-    </fieldset>
 
-    <fieldset class = "form-group">
-    <%= c.label :card_type %>
-    <%= c.select :card_type, [["Visa","visa"], ["MasterCard", "mastercard"], ["Discover", "discover"], ["American Express", "american_express"]], class: "form-control" %>
-    </fieldset>
-
-    <fieldset class = "form-group">
-    <%= c.label :card_number %>
-    <%= c.text_field :card_number, class: "form-control" %>
-    </fieldset>
-
-    <fieldset class = "form-group">
-    <%= c.label :card_verification, "Card Verification Value (CVV)" %>
-    <%= c.text_field :card_verification, class: "form-control" %>
-    </fieldset>
-
-    <fieldset class = "form-group">
-    <%= c.label :card_expires_on %>
-    <%= c.date_select :card_expires_on, discard_day: true, start_year: Date.today.year, end_year: (Date.today.year+10), add_month_numbers: true, class: "form-control" %>    
-    </fieldset>
-    
-  <% end %>
-    
-</div>
-  <div id="paypal"></div>
+    <%= f.fields_for :card do |c| %>
+      <fieldset class = "form-group">
+        <%= c.label :first_name %>
+        <%= c.text_field :first_name, class: "form-control" %>
+      </fieldset>
   
+      <fieldset class = "form-group">
+        <%= c.label :last_name %>
+        <%= c.text_field :last_name, class: "form-control" %>
+      </fieldset>
 
+      <fieldset class = "form-group">
+        <%= c.label :card_type %>
+        <%= c.select :card_type, [["Visa","visa"], ["MasterCard", "mastercard"], ["Discover", "discover"], ["American Express", "american_express"]], class: "form-control" %>
+      </fieldset>
 
-<br>
-<div class="centerbtn">
+      <fieldset class = "form-group">
+        <%= c.label :card_number %>
+        <%= c.text_field :card_number, class: "form-control" %>
+      </fieldset>
 
+      <fieldset class = "form-group">
+        <%= c.label :card_verification, "Card Verification Value (CVV)" %>
+        <%= c.text_field :card_verification, class: "form-control" %>
+      </fieldset>
 
-
-    <%= f.submit "Check out", class: "btn btn-primary checkout_btn" %>
+      <fieldset class = "form-group">
+        <%= c.label :card_expires_on %>
+        <%= c.date_select :card_expires_on, discard_day: true, start_year: Date.today.year, end_year: (Date.today.year+10), add_month_numbers: true, class: "form-control" %>    
+      </fieldset>
+    
+    <% end %>
+    <br>
+    <div class="centerbtn cardbtn">
+      <%= f.submit "Check out", class: "btn btn-primary checkout_btn" %>
+    </div>   
   <% end %>
 </div>
 
+
+
+<div id="paypal">
+  <%= form_for @order do |f| %>
+    <% if current_user.ship_address.present? %>
+      <%= f.hidden_field :ship_address_id, value: current_user.ship_address.id, class: "ship_address_id" %>
+    <% end %>
+    <%= f.hidden_field :paytype, value: "paypal", class: 'paytype_paypal' %>
+    <div class = "centerbtn">
+      <%= f.submit "Check out", class: "btn btn-primary checkout_btn" %>
+    </div>
+  <% end %>
+</div>

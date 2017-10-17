@@ -1,5 +1,6 @@
 class Order < ApplicationRecord
-
+  validates :ship_address_id, presence: true
+  
   before_save :unique_on
   has_many    :order_items
   has_many    :products, through: :order_items
@@ -64,6 +65,7 @@ class Order < ApplicationRecord
     #
   def paypal_url(return_path)
     values = {
+      shippingAdress: ShipAddress.find(ship_address_id),
       business: "congdacit-facilitator@gmail.com",
       cmd: "_cart",
       upload: 1,

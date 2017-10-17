@@ -26,4 +26,5 @@ class ApplicationController < ActionController::Base
     @cart ||= Cart.find(session[:cart_id])
   end
 
+
 end
