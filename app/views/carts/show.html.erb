@@ -11,7 +11,9 @@
 <% current_cart.order_items.each do |item| %>
   show item here
 
-  <%= item.quantity %>
+quantity:  <%= item.quantity %>
+id:  <%= item.id %>
+price: <%= item.price_line %>
 <% end %>
 
 
