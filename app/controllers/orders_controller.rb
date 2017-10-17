@@ -1,6 +1,6 @@
 class OrdersController < ApplicationController
   
-  before_action :authenticate_user!, :set_cart
+  before_action :authenticate_user!, #:set_cart
 
   protect_from_forgery except: [:hook]
 

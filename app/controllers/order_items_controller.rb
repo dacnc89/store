@@ -1,6 +1,6 @@
 class OrderItemsController < ApplicationController
   include CurrentCart
-  before_action :set_cart, only: :add_order_item
+  #before_action :set_cart, only: :add_order_item
   before_action :set_order_item, only: [:show, :edit, :update, :destroy]
 
 
