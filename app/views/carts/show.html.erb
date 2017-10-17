@@ -1,1 +1,13 @@
-Show me cart page nowwwwwwwwwwwwwwwwwwww
+<div class="cart-page">
+  You have <%= pluralize(current_cart.order_items.count, 'Product') %> in your Cart
+
+<% if current_cart.order_items == nil %>
+  @cart,order_items == nil 
+<% else %>
+  @cart.order_item not nil 
+<% end %>
+
+
+
+
+</div>
