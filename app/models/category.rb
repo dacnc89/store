@@ -25,7 +25,11 @@ class Category < ApplicationRecord
   end
 
 
-  def all_products
-    
+  def self.search(search_params)
+    if search_params && search_params != ""
+      where("lower(name) LIKE lower(?)", "%#{search_params}%")
+    else
+      order('created_at')
+    end
   end
 end

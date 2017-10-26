@@ -1,0 +1,21 @@
+<% content_for :admin_search_form do %>
+  <%= form_tag admin_customers_path, method: "get" do %>
+    <%= text_field_tag :search %>
+    <%= submit_tag "Search" %>
+  <% end %>
+<% end %>
+
+<%= pluralize(@customers.size, 'Customer') %>
+<br>
+<% @customers.each do |c| %>
+  <section class="roww">
+    <%= c.email %>
+    <%= link_to "", admin_destroy_customer_path(c), method: :delete, data: {confirm: "Sure?"}, class: "option fa fa-remove" %>
+    <p> <%= c.created_at %>
+  </section>
+<% end %>
+
+<div class="flickr_pagination">
+  <%= will_paginate @customers, :container => false %>
+</div>
+

@@ -20,9 +20,9 @@
 
 
 
-
 $(document).on("turbolinks:load", function (){
-  console.log("ready");
+  console.log("turbolinks:load ready");
+
 
   $(".add-to-cart-btn").on("click", function(e){
     e.preventDefault();

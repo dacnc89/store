@@ -1,6 +1,7 @@
 class ApplicationController < ActionController::Base
   include CurrentCart
   before_action :set_cart
+  layout :layout_by_resource
 
   after_action :store_location
   protect_from_forgery with: :exception
@@ -26,5 +27,12 @@ class ApplicationController < ActionController::Base
     @cart ||= Cart.find(session[:cart_id])
   end
 
+  def layout_by_resource
+    if devise_controller? && resource_name == :admin
+      "admin"
+    else
+      "application"
+    end
+  end
 
 end

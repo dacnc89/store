@@ -17,7 +17,7 @@ class Product < ApplicationRecord
     
     if search_params && search_params != ""
       #where('name ILIKE ?', "%#{search_params}%")
-      where("lower(name) LIKE lower(?)", "%#{search_params}%")
+      where("lower(name) LIKE lower(?) OR lower(description) LIKE lower(?)", "%#{search_params}%", "%#{search_params}%")
     else
       order('created_at ASC')
     end

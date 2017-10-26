@@ -1,5 +1,5 @@
 class OrdersController < ApplicationController
-  before_action :authenticate_user! #, :set_cart
+  before_action :authenticate_user! , only: [:show, :new, :create]
 
   protect_from_forgery except: [:hook]
 
@@ -44,6 +44,7 @@ class OrdersController < ApplicationController
         current_cart.destroy
         if @order.card.purchase
           redirect_to order_path(@order), notice: @order.card.card_transaction.message
+          flash[:warning] = "Some thing went wrong during delete this order!"
         else
           redirect_to order_path(@order), alert: @order.card.card_transaction.message
         end
@@ -68,6 +69,16 @@ class OrdersController < ApplicationController
     end
   end 
 
+  def destroy
+    @order = Order.find(params[:id])
+    if @order.destroy
+      redirect_to admin_orders_path
+      flash[:success] = "Deleted"
+    else
+      redirect_to admin_orders_path
+      flash[:warning] = "Something went wrong"
+    end
+  end
 
   private 
   def order_params

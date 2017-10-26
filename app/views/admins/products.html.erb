@@ -1,0 +1,21 @@
+<%= link_to "New Product", admin_new_product_path %>
+<% content_for :admin_search_form do %>
+<%= form_tag admin_products_path, method: "get" do %>
+	<%= text_field_tag :search %>
+	<%= submit_tag "Search" %>
+  <% end %> 
+<% end %>
+
+<%= pluralize(@products.size, 'Product') %> 
+<br>
+<% @products.each do |p| %>
+  <section class="roww">
+    <%= p.name %>
+    <%= link_to "", admin_destroy_product_path(p), method: :delete, data: {confirm: "Sure?"}, class: " option fa fa-remove" %>
+    <%= link_to "", admin_edit_product_path(p), class: 'option fa fa-pencil' %>
+  </section>
+<% end %>
+
+<div class="flickr_pagination">
+  <%= will_paginate @products, :container => false %>
+</div>
