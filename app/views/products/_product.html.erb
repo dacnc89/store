@@ -1,0 +1,45 @@
+<%= form_for @product, url: admin_update_product_path, html: {class: 'form-group'} do |f| %>
+  <fieldset class="form-group">
+    <%= f.label :name %>
+    <%= f.text_field :name, class: 'form-control' %>
+  </fieldset>
+
+  <fieldset class="form-group">
+    <%= f.label :price%>
+    <%= f.number_field :price, class: 'form-control' %>
+  </fieldset>
+
+  <fieldset class="form-group">
+    <%= f.label :description %>
+    <%= f.text_field :description, class: 'form-control' %>
+  </fieldset>
+
+  <fieldset class="form-group">
+    <%= f.label :available_quantity %>
+    <%= f.number_field :available_quantity, class: 'form-control' %>
+  </fieldset>
+
+  <fieldset class="form-group">
+    <%= f.label :image_file %>
+    <%= f.text_field :image_file, class: 'form-control' %>
+  </fieldset>
+
+   <fieldset class="form-group">
+      <%= f.label :category %>
+      <%= f.collection_select :category_id, Category.all, :id, :name, class: 'form-control' %>
+    </fieldset>
+
+
+
+  <fieldset class="form-group">
+    <%= f.label :company %>
+    <%= f.collection_select :company_id, Company.all, :id, :name, class: 'form-control' %>
+  </fieldset>
+  
+  <fieldset class="form-group">
+    <%= f.label :brand %>
+    <%= f.collection_select :brand_id, Brand.all, :id, :name, class: 'form-control' %>
+  </fieldset>
+
+  <%= f.submit %>
+<% end %>

@@ -5,9 +5,14 @@ class Order < ApplicationRecord
   has_many    :order_items
   has_many    :products, through: :order_items
   has_one     :ship_adress
-  has_one     :card
+  has_one     :card, dependent: :destroy
   accepts_nested_attributes_for :card
   validates_associated :card
+
+
+  self.per_page = 20
+  WillPaginate.per_page = 20
+
 
   def self.generate_order_number
 
@@ -86,6 +91,14 @@ class Order < ApplicationRecord
   end
 
 
+  # For admin search orders page
+  def self.search(search_params)
+    if search_params && search_params != ""
+      where("lower(order_number) ILIKE lower(?)", "%#{search_params}%")
+    else
+      order('created_at')
+    end
+  end
 
 
 end 

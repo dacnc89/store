@@ -11,6 +11,10 @@ source 'https://rails-assets.org' do
   gem 'rails-assets-tether', '>=1.1.0'
 end
 
+
+# Add Administrate gem for admin page
+# gem 'administrate'
+
 # Ad will_paginate for pages products
 gem 'will_paginate'
 

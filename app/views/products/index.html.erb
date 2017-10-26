@@ -1,3 +1,7 @@
+<div class="refine-wrapper">
+  Refine navigation
+</div>
+
 <h3>All Products</h3>
 <div class="products-wrapper">
 <% @products.each do |product| %>
@@ -17,5 +21,5 @@
 </div>
 
 <div class="flickr_pagination">
-	<%= will_paginate @posts, :container => false %>
+	<%= will_paginate @products, :container => false %>
 </div>

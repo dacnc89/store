@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+  <html>
+    <head>
+      <title>Store</title>
+      <%= csrf_meta_tags %>
+  
+      <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+      <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    </head>
+
+
+    <body>
+      <% flash.each do |key, value| %>
+       <% if key=="notice" %>
+          <div class="alert alert-success">
+        <% elsif key == "alert" %>
+          <div class="alert alert-danger">
+        <% else %>
+          <div class="alert alert-<%= key %>">
+          <%end%>
+            <a href="#" class="close" data-dismiss="alert">&#215;</a>
+          <%= value %>
+      <% end%>
+          </div>
+          <div class="main-on-top">
+            <% if admin_signed_in? %> 
+              Welcome  <%= current_admin.email %>
+            <%= link_to  destroy_admin_session_path, method: 'delete', data: {confirm: "Sure to log out?"} do %>
+              <span style="color:#ff6347">Log out </span>
+            <% end %>
+          <% else %>
+            <% if current_admin %>
+            <% else %>
+              Welcome , Please 
+              <%= link_to  new_admin_session_path do %>
+                <span style="color:#ff6347"> Log in</span>
+              <% end %>
+              with admin account
+            <% end %>
+          <% end%>
+          </div>
+
+			<div class="wrapper">
+        <div class="menu-on-left">
+          <%= link_to "Dashboard", admin_path, class: "left-menu"%>
+          <%= link_to "Customers", admin_customers_path, class: "left-menu" %>
+          <%= link_to "Orders", admin_orders_path, class: "left-menu" %>
+				<%= link_to "Products", admin_products_path, class: "left-menu" %>
+				<%= link_to "Categories", admin_categories_path, class: "left-menu" %>
+        <div class="admin-content">
+        </div>
+   
+			</div>
+			<div class="content-manager">
+         <div class="search_form">
+            <%= yield :admin_search_form %> 
+        </div>
+       <div class="page_children">
+          <%= yield %>
+        </div>
+			</div>
+			</div>
+
+    </body>
+  </html>
+
