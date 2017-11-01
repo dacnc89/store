@@ -1,5 +1,19 @@
 <div class="refine-wrapper">
-  Refine navigation
+  <%= form_tag products_path, method: 'get' do %>
+    <div class="row">
+    <%# select_tag :category_filter_id, options_for_select(["All categories"] + @categories.collect{ |category| [category.name, category.id]}), onchange: 'this.form.submit()' %>
+    <div class="col">
+    <%= select_tag :category_id,options_for_select(@categories.collect{|c| [c.name, c.id]}, @category_id), prompt: "Select Category", onchange: 'this.form.submit()', class: 'form-control' %>
+    </div>
+    <div class="col">
+    <%= select_tag :price_from, options_for_select(@prices_from, @from), prompt: "Price from",onchange: 'this.form.submit()', class: 'form-control' %>
+    </div>
+    <div class="col">
+    <%= select_tag :price_to, options_for_select(@prices_to, @to), prompt: "Price to", onchange: 'this.form.submit()', class: 'form-control' %>
+    </div>
+    <%-# submit_tag "Ok" %>
+    </div>
+  <% end %>
 </div>
 
 <h3>All Products</h3>
@@ -14,7 +28,7 @@
         <button class="add-to-cart-btn btn", value = "<%= product.id %>"> Add to Cart </button>
       </div>
       <%= link_to product.name, product_path(product.id) %><br>
-      <%= product.category.name %>
+      <p> Price: <%= number_to_currency(product.price) %>
     </div>
   </div>
 <% end %>
