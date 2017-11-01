@@ -2,8 +2,21 @@ class ProductsController < ApplicationController
   layout :custom_layout
 
   def index
-    @products = Product.paginate(page: params[:page]).search(params[:search])
-    #@cart = Cart.find(session[:cart_id])
+    @prices_from = [1.0, 5.0, 10.0, 20.0]
+    @prices_to = [25.0, 30.0, 40.0, 50.0]
+    @categories = Category.all
+
+    @from = params[:price_from]
+    @to = params[:price_to]
+  #  if params[:category_id].present?
+    @category_id = params[:category_id]
+  #  @products = Product.paginate(page: params[:page]).category_id(@category_id)
+  #  elsif params[:search].present?
+  #  @products = Product.paginate(page: params[:page]).search(params[:search]) 
+  #  else
+  #    @products = Product.paginate(page: params[:page]).all
+  #  end
+    @products = Product.paginate(page: params[:page]).filter(params.slice(:category_id, :price_from, :price_to, :search))
   end
 
   def show

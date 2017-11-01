@@ -5,6 +5,21 @@ class Product < ApplicationRecord
   has_many   :order_items
   has_many   :order, through: :order_items
 
+  # For filter products in index page
+  scope :category_id, ->(cate_id) {where category_id: cate_id}
+  scope :price_from, ->(price) {where("price > ?", price)}
+  scope :price_to, ->(price) {where("price < ?", price) }
+
+  def self.filter(filter_params)
+    result = self.where(nil)
+    filter_params.each do |key,value|
+      result = result.public_send(key,value) if value.present?
+    end
+    result
+  end
+
+
+
   # for will_paginate gem
   self.per_page = 20
   WillPaginate.per_page = 20
