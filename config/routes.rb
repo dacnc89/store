@@ -28,6 +28,7 @@ Rails.application.routes.draw do
   post '/admin/categories', to: 'categories#create'
   delete 'category/:id', to: 'categories#destroy'
 
+  #get 'product/:name', to: 'products#show', as: 'product'    to show url with name
   get 'product/:id', to: 'products#show', as: 'product'
 
   #get order item

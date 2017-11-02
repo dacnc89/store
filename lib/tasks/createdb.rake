@@ -9,6 +9,9 @@ namespace :createdb do
     puts "Create company Zimean"
     zimean  =   Company.create name: "Zimean"
 
+    puts "Create Admin account"
+    Admin.create(email: "admin@store.com", password: "adminadmin")
+
     puts "Create Categories"
     laptop  = Category.create name: "Laptop"
     ipad    = Category.create name: "Ipad"

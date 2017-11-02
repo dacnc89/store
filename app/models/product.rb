@@ -1,14 +1,23 @@
 class Product < ApplicationRecord
+  # For filter products in index page
+  scope :category_id, ->(cate_id) {where category_id: cate_id}
+  scope :price_from, ->(price) {where("price > ?", price)}
+  scope :price_to, ->(price) {where("price < ?", price) }
+
   belongs_to :company
   belongs_to :category
   belongs_to :brand
   has_many   :order_items
   has_many   :order, through: :order_items
 
-  # For filter products in index page
-  scope :category_id, ->(cate_id) {where category_id: cate_id}
-  scope :price_from, ->(price) {where("price > ?", price)}
-  scope :price_to, ->(price) {where("price < ?", price) }
+  validates :name, presence: true, uniqueness: true
+  validates :price, presence: true
+  validates :category_id, presence: true
+
+  #def to_param      # Overwrite to_param for url with name
+  #  name
+  #end
+
 
   def self.filter(filter_params)
     result = self.where(nil)
@@ -29,7 +38,6 @@ class Product < ApplicationRecord
   end
 
   def self.search(search_params)
-    
     if search_params && search_params != ""
       #where('name ILIKE ?', "%#{search_params}%")
       where("lower(name) LIKE lower(?) OR lower(description) LIKE lower(?)", "%#{search_params}%", "%#{search_params}%")

@@ -21,6 +21,7 @@ class ProductsController < ApplicationController
 
   def show
     @product = Product.find(params[:id])
+    #@product = Product.find_by_name(params[:name]) to show url with name
     @category = @product.category
 
   end

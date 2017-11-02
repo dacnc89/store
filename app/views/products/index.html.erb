@@ -21,13 +21,13 @@
 <% @products.each do |product| %>
   <div class="product-box-wrapper ">
     <div class="product_image">
-      <%= link_to image_tag(product.image_file), product_path(product.id) %>
+      <%= link_to image_tag(product.image_file), product_path(product) %>
     </div>
     <div class="bottom">
       <div class="center-child">
         <button class="add-to-cart-btn btn", value = "<%= product.id %>"> Add to Cart </button>
       </div>
-      <%= link_to product.name, product_path(product.id) %><br>
+      <%= link_to product.name, product_path(product) %><br>
       <p> Price: <%= number_to_currency(product.price) %>
     </div>
   </div>

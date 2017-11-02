@@ -2,7 +2,7 @@
 <%= link_to "Home", products_path %> <span style="color:green" class="fa fa-angle-double-right"></span>
 <%#- link_to @product.category.name, controller: "pages", action: "category", category_name: @product.category.name, amount: @product.category.products.count %>
 <% @product.get_category.reverse.each do |c| %>
-  <%= link_to c.name, category_path(c.id) %> <span style ="color:green" class="fa fa-angle-double-right"></span> 
+  <%= link_to c.name, category_path(c) %> <span style ="color:green" class="fa fa-angle-double-right"></span> 
 <% end %>
  <%= truncate(@product.playname, length: 17) %>
 </div>
