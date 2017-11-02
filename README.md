@@ -1,19 +1,19 @@
 # README
+Rails Store web
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+* Ruby version:
+```ruby
+Ruby 2.4.1
+Rails 5.1.4
+```
 
-Things you may want to cover:
+* System: Ubuntu 16.04
 
-* Ruby version
+* You need to custom password in your database.yml file
 
-* System dependencies
+* Database creation run rake db:create db:migrate
 
-* Configuration
-
-* Database creation
-
-* Database initialization
+* Database initialization run rake createdb:create_products
 
 * How to run the test suite
 
@@ -21,4 +21,4 @@ Things you may want to cover:
 
 * Deployment instructions
 
-* ...
+
